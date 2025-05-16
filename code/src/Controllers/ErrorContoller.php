@@ -5,7 +5,7 @@ use Geekbrains\Application1\Render;
 $render = new Render();
 
 if ($controllerNotFound) {
-    // Выводим 404 страницу и завершаем скрипт
+    // Вывод 404 страницу
     echo $render->renderErrorPage();
     exit;
 }

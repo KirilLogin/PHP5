@@ -52,14 +52,14 @@ class UserController {
             );
         }
 
-        // Создаем пользователя
-        $birthdayTimestamp = strtotime($birthday); // или (new \DateTime($birthday))->getTimestamp()
+        
+        $birthdayTimestamp = strtotime($birthday); 
         $user = new User($name, $birthdayTimestamp);
 
-        // Сохраняем пользователя (предполагаем, что есть метод saveUserToStorage)
+        
         $result = User::saveUserToStorage($user);
 
-        // Формируем сообщение в зависимости от результата
+        
         $message = $result ? "Пользователь успешно сохранён" : "Ошибка при сохранении пользователя";
 
         return $render->renderPage(
