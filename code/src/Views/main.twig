@@ -2,13 +2,25 @@
 <html>
     <head>
         <title>{{ title }}</title>
+         <link rel="stylesheet" href="/static/styles.css">
     </head>
     <body>
-    <nav>
+    {% include 'header.twig' %}
+    <nav class="main-nav">
         <a href="/">Главная</a>
         <a href="/user">Пользователи</a>
         <a href="/about">О нас</a>
     </nav>
-        {% include content_template_name %}
+     <main class="main-content">
+        <aside class="sidebar">
+            {% include 'sidebar.twig' %}
+            <p>Текущее время: {{ current_time }}</p>
+        </aside>
+         <section class="content">
+            {% include content_template_name %}
+        </section>
+    </main>
+
+    {% include 'footer.twig' %}
     </body>
 </html>

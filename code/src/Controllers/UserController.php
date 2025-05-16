@@ -33,4 +33,41 @@ class UserController {
                 ]);
         }
     }
+
+    // Новый метод для сохранения пользователя через GET
+    public function actionSave() {
+        $render = new Render();
+
+        // Получаем параметры из GET
+        $name = $_GET['name'] ?? null;
+        $birthday = $_GET['birthday'] ?? null;
+
+        if (!$name || !$birthday) {
+            return $render->renderPage(
+                'user-save-result.twig',
+                [
+                    'title' => 'Ошибка сохранения',
+                    'message' => 'Не передано имя или дата рождения'
+                ]
+            );
+        }
+
+        // Создаем пользователя
+        $birthdayTimestamp = strtotime($birthday); // или (new \DateTime($birthday))->getTimestamp()
+        $user = new User($name, $birthdayTimestamp);
+
+        // Сохраняем пользователя (предполагаем, что есть метод saveUserToStorage)
+        $result = User::saveUserToStorage($user);
+
+        // Формируем сообщение в зависимости от результата
+        $message = $result ? "Пользователь успешно сохранён" : "Ошибка при сохранении пользователя";
+
+        return $render->renderPage(
+            'user-save-result.twig',
+            [
+                'title' => 'Сохранение пользователя',
+                'message' => $message
+            ]
+        );
+    }
 }

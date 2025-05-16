@@ -25,7 +25,16 @@ class Render {
         
         $templateVariables['content_template_name'] = $contentTemplateName;
         $templateVariables['title'] = 'имя страницы';
+        $templateVariables['current_time'] = date('H:i:s'); // текущие часы:минуты:секунды
 
         return $template->render($templateVariables);
     }
+
+    public function renderErrorPage(string $message = 'Страница не найдена') {
+    http_response_code(404);
+    return $this->environment->render('error.twig', [
+        'message' => $message,
+        'title' => 'Ошибка 404'
+    ]);
+}
 }
